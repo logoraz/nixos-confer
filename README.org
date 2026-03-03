@@ -1,0 +1,14 @@
+#+title: nixos-confer
+#+author: logoraz
+#+date: 2026-02-20
+#+options: toc:nil
+#+startup: overview
+#+startup: inlineimages
+:meta:
+:end:
+
+
+ #+html: <p align="center"> <img src="assets/nixos-logo.svg" width="300"/> </p>
+
+
+ NixOS Flake  - Modular Configuration for my framework laptop.
