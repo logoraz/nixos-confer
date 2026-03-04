@@ -24,6 +24,10 @@
     lem-webview
     emacs-pgtk
 
+    # Python Toolchain
+    python3
+    python3Packages.python-lsp-server
+
 
     # Other toolchains
     openssl
