@@ -24,8 +24,8 @@ in
       # NixOS Convenient commands
       nixos-list = "nixos-rebuild list-generations";
       nixos-rollback = "sudo nixos-rebuild switch --rollback";
-      nix-update = "nix flake update ~/.config/nixos";
-      nix-show = "nix flake show ~/.config/nixos";
+      nixos-update = "nix flake update ~/.config/nixos";
+      nixos-show = "nix flake show ~/.config/nixos";
     };
 
     # Environment variables
