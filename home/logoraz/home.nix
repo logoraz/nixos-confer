@@ -22,6 +22,7 @@
     ecl
 
     # Lisp IDE/Editors
+    # (lem-webview.override { sbcl = pkgs-unstable.sbcl; })  # Try newer SBCL
     lem-webview
     emacs-pgtk
 
