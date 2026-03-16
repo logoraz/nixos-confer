@@ -3,22 +3,28 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     lem.url = "github:lem-project/lem";
     lem.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, lem, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, lem, ... }:
   let
     system = "x86_64-linux";
+    pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
   in {
     nixosConfigurations.framework = nixpkgs.lib.nixosSystem {
       inherit system;
 
       # Pass special arguments including self for git revision
-      specialArgs = { inherit self; };
+      specialArgs = {
+        inherit self;
+        inherit pkgs-unstable;
+      };
 
       modules = [
         ./hosts/framework/configuration.nix
@@ -36,6 +42,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.logoraz = import ./home/logoraz/home.nix;
+          home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
         }
       ];
     };

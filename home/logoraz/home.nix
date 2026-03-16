@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 {
   imports = [
@@ -16,8 +16,10 @@
   # User Packages (apps you use, not system services)
   home.packages = with pkgs; [
     # Lisp Toolchain
-    clasp-common-lisp
-    sbcl
+    # clasp-common-lisp
+    # sbcl
+    pkgs-unstable.clasp-common-lisp # Latest Clasp from unstable
+    pkgs-unstable.sbcl              # Latest SBCL from unstable
     ecl
 
     # Lisp IDE/Editors
