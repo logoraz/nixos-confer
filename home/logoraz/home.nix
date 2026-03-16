@@ -17,9 +17,8 @@
   home.packages = with pkgs; [
     # Lisp Toolchain
     # clasp-common-lisp
-    # sbcl
     pkgs-unstable.clasp-common-lisp # Latest Clasp from unstable
-    pkgs-unstable.sbcl              # Latest SBCL from unstable
+    sbcl
     ecl
 
     # Lisp IDE/Editors
