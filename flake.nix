@@ -9,13 +9,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lem.url = "github:lem-project/lem";
-    lem.inputs.nixpkgs.follows = "nixpkgs";
+    # lem.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, lem, ... }:
   let
     system = "x86_64-linux";
     pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+    pkgs-lem = lem.packages.${system};
   in {
     nixosConfigurations.framework = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -24,6 +25,7 @@
       specialArgs = {
         inherit self;
         inherit pkgs-unstable;
+        inherit pkgs-lem;
       };
 
       modules = [
@@ -33,16 +35,19 @@
         {
           system.configurationRevision = self.rev or self.dirtyRev or "unknown";
         }
-        {
-          nixpkgs.overlays = [ lem.overlays.default ];
-        }
+        # {
+        #   nixpkgs.overlays = [ lem.overlays.default ];
+        # }
 
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.logoraz = import ./home/logoraz/home.nix;
-          home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
+          home-manager.extraSpecialArgs = {
+            inherit pkgs-unstable;
+            inherit pkgs-lem;
+          };
         }
       ];
     };

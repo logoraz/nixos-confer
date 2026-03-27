@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-unstable, pkgs-lem, ... }:
 
 {
   imports = [
@@ -22,8 +22,7 @@
     ecl
 
     # Lisp IDE/Editors
-    # (lem-webview.override { sbcl = pkgs-unstable.sbcl; })  # Try newer SBCL
-    lem-webview
+    pkgs-lem.lem-webview
     emacs-pgtk
 
     # Python Toolchain
